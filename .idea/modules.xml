@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Https_Swastik.iml" filepath="$PROJECT_DIR$/Https_Swastik.iml" group="Https_Swastik" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Https_Swastik/app" />
+    </modules>
+  </component>
+</project>
