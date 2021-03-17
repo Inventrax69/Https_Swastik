@@ -70,7 +70,7 @@ private static void initHttpLogging() {
 
             SSLContext sslContext = null;
             try {
-                sslContext = createCertificate(context.getResources().openRawResource(R.raw.merlin));
+                sslContext = createCertificate(context.getResources().openRawResource(R.raw.swastik));
             } catch (CertificateException | IOException | KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }

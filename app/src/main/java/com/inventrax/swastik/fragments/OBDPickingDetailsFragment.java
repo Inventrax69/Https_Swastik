@@ -103,7 +103,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
     boolean pickValidateComplete = false;
     boolean isRSNScanned = false;
     String assignedId = "", KitId = "", soDetailsId = "", Lineno = "", POSOHeaderId = "", sLoc = "", accountId = "", huNo = "", huSize = "";
-    int recQty, totalQty;
+    double recQty, totalQty;
     //For Honey well barcode
     private static BarcodeReader barcodeReader;
     private AidcManager manager;
@@ -269,8 +269,9 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
 
                     if (!lblReceivedQty.getText().toString().isEmpty() && !lblReceivedQty.getText().toString().equals("0")) {
 
-                        int reqQty = totalQty - recQty;
-                        int qty = Integer.parseInt(lblReceivedQty.getText().toString().split("[.]")[0]);
+                        double reqQty = totalQty - recQty;
+                        // double qty = Double.parseDouble(lblReceivedQty.getText().toString().split("[.]")[0]);
+                        double qty = Double.parseDouble(lblReceivedQty.getText().toString());
                         if (reqQty < qty) {
                             common.showUserDefinedAlertType(errorMessages.EMC_0068, getActivity(), getContext(), "Error");
 
@@ -1117,10 +1118,12 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         return;
                                     }
 
-                                    lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
-
-                                    recQty = Integer.parseInt(oOutboundDTO.getPickedQty().split("[.]")[0]);
-                                    totalQty = Integer.parseInt(oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                    //  lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                    lblassignedQty.setText(oOutboundDTO.getPickedQty() + "/" + oOutboundDTO.getAssignedQuantity());
+                                    // recQty = Integer.parseInt(oOutboundDTO.getPickedQty().split("[.]")[0]);
+                                    // totalQty = Integer.parseInt(oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                    recQty = Double.parseDouble(oOutboundDTO.getPickedQty());
+                                    totalQty =  Double.parseDouble(oOutboundDTO.getAssignedQuantity());
 
                                     lblMfgDate.setText(oOutboundDTO.getMfgDate());
                                     lblExpDate.setText(oOutboundDTO.getExpDate());
@@ -1159,8 +1162,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
                                         ivScanRSN.setImageResource(R.drawable.fullscreen_img);
 
-                                        lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
-
+                                        //  lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                        lblassignedQty.setText(oOutboundDTO.getPickedQty() + "/" + oOutboundDTO.getAssignedQuantity());
                                         ClearFields();
                                         clearData();
 
@@ -1603,9 +1606,9 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                     cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.white));
                                     ivScanRSN.setImageResource(R.drawable.check);
 
-                                    lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                    //lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
 
-
+                                    lblassignedQty.setText(oOutboundDTO.getPickedQty() + "/" + oOutboundDTO.getAssignedQuantity());
                                     soundUtils.alertSuccess(getActivity(), getContext());
 
                                     GetPickItem();
@@ -1660,7 +1663,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
             WMSCoreMessage message = new WMSCoreMessage();
             message = common.SetAuthentication(EndpointConstants.Outbound, getContext());
             //final OutbountDTO outbountDTO = new OutbountDTO();
-            int reqQty = totalQty - recQty;
+            double reqQty = totalQty - recQty;
             OutbountDTO oOutboundDTO = new OutbountDTO();
             oOutboundDTO.setUserId(userId);
             oOutboundDTO.setAccountID(accountId);
@@ -1787,7 +1790,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         lblBatchNo.setText(oOutboundDTO.getBatchNo());
                                         lblLocationNo.setText(oOutboundDTO.getLocation());
                                         etPallet.setText(oOutboundDTO.getPalletNo());
-                                        lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                        // lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
+                                        lblassignedQty.setText(oOutboundDTO.getPickedQty() + "/" + oOutboundDTO.getAssignedQuantity());
                                         lblMfgDate.setText(oOutboundDTO.getMfgDate());
                                         lblExpDate.setText(oOutboundDTO.getExpDate());
                                         lblProjectRefNo.setText(oOutboundDTO.getProjectNo());
